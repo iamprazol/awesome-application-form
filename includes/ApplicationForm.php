@@ -8,6 +8,8 @@
 
 namespace AwesomeApplicationForm;
 
+use AwesomeApplicationForm\Admin\Admin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -37,6 +39,14 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		 * @var use AwesomeApplicationForm\Install;
 		 */
 		public $install = null;
+
+		/**
+		 * Admin class instance
+		 *
+		 * @var \Admin
+		 * @since 1.0.0
+		 */
+		public $admin = null;
 
 		/**
 		 * Plugin Version
@@ -81,6 +91,12 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 
 			// Files to include.
 			$this->install = new Install();
+
+			// Class admin.
+			if ( $this->is_admin() ) {
+				// require file.
+				$this->admin = new Admin();
+			}
 
 		}
 
