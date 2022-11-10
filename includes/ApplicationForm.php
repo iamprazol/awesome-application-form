@@ -30,6 +30,15 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		protected static $instance = null;
 
 		/**
+		 * Instance of Install Class.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var use AwesomeApplicationForm\Install;
+		 */
+		public $install = null;
+
+		/**
 		 * Plugin Version
 		 *
 		 * @var string
@@ -60,13 +69,19 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 			// Actions and Filters.
 			add_filter( 'plugin_action_links_' . plugin_basename( AWESOME_APPLICATION_FORM_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
 			add_action( 'init', array( $this, 'includes' ) );
+
+			register_activation_hook( __FILE__, array( 'Install', 'install' ) );
+
 		}
 
 		/**
 		 * Includes.
 		 */
 		public function includes() {
+
 			// Files to include.
+			$this->install = new Install();
+
 		}
 
 		/**
