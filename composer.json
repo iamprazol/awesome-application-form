@@ -1,0 +1,52 @@
+{
+	"name": "awesome/application-form",
+	"description": "Application Form Plugin For WordPress.",
+	"homepage": "http://prajjwalpoudel.com.np/",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0-or-later",
+  "autoload": {
+		"files": [
+			"includes/Functions/CoreFunctions.php"
+		  ],
+		"psr-4": {
+		  "AwesomeApplicationForm\\": "includes/"
+		}
+	  },
+	"require": {
+    "composer/installers": "~2.0.0"
+	},
+	"require-dev": {
+    "wp-cli/i18n-command": "2.2.9"
+	},
+	"scripts": {
+	  "phpcs": [
+		"phpcs -s -p"
+	  ],
+	  "phpcs-pre-commit": [
+		"phpcs -s -p -n"
+	  ],
+	  "phpcbf": [
+		"phpcbf -p"
+	  ],
+	  "makepot-audit": [
+		"wp --allow-root i18n make-pot . --exclude=\".github,.wordpress-org,bin,node_modules,vendor\" --headers='{\"Report-Msgid-Bugs-To\":\"help@gmail.com\"}' --slug=awesome-application-form"
+	  ],
+	  "makepot": [
+		"@makepot-audit --skip-audit"
+	  ]
+	},
+	"extra": {
+	  "scripts-description": {
+		"phpcs": "Analyze code against the WordPress coding standard with PHP_CodeSniffer",
+		"phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier",
+		"makepot-audit": "Generate langauges/awesome-application-form.pot file and run audit",
+		"makepot": "Generate langauges/awesome-application-form.pot file"
+	  }
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true
+		}
+	}
+}
