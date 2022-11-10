@@ -9,6 +9,7 @@
 namespace AwesomeApplicationForm;
 
 use AwesomeApplicationForm\Admin\Admin;
+use AwesomeApplicationForm\Admin\Shortcodes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -47,6 +48,15 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		 * @since 1.0.0
 		 */
 		public $admin = null;
+
+		/**
+		 * Shortcodes.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var AwesomeApplicationForm\Admin\Shortcodes;
+		 */
+		public $shortcodes = null;
 
 		/**
 		 * Plugin Version
@@ -91,6 +101,7 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 
 			// Files to include.
 			$this->install = new Install();
+			$this->shortcodes = new Shortcodes();
 
 			// Class admin.
 			if ( $this->is_admin() ) {
