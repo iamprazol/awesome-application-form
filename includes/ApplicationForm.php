@@ -9,7 +9,6 @@
 namespace AwesomeApplicationForm;
 
 use AwesomeApplicationForm\Admin\Admin;
-use AwesomeApplicationForm\Admin\Shortcodes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -54,7 +53,7 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		 *
 		 * @since 1.0.0
 		 *
-		 * @var AwesomeApplicationForm\Admin\Shortcodes;
+		 * @var AwesomeApplicationForm\Shortcodes;
 		 */
 		public $shortcodes = null;
 

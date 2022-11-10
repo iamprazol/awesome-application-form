@@ -7,7 +7,7 @@
  * @package  AwesomeApplicationForm/Classes
  */
 
-namespace  AwesomeApplicationForm\Admin;
+namespace  AwesomeApplicationForm;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -49,6 +49,9 @@ class Shortcodes {
 	 * @since 1.0.0
 	 */
 	public static function render_application_form() {
+
+		wp_enqueue_style( "awesome-application-form-style", AWESOME_APPLICATION_FORM_ASSETS_URL . '/css/awesome-application-form.css', array(), AWESOME_APPLICATION_FORM_VERSION );
+
 		if ( is_user_logged_in() ) {
 			include AWESOME_APPLICATION_FORM_TEMPLATE_PATH . '/awesome-application-form-page.php';
 		}
