@@ -31,10 +31,13 @@ body {
 	margin-left: 5px;
 }
 
+.aaf-frontend-field {
+    outline: 0;
+}
+
 input[type=text] {
 	border-radius: 2px;
 	border: 1px solid #c0c4d4;
-    outline: 0;
     transition: all .35s;
     padding: 10px 15px;
     background: #fff;

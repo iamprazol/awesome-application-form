@@ -48,7 +48,7 @@ class Admin {
 			'awesome-application-form',
 			array(
 				$this,
-				'awesome_application_form_settings_page',
+				'awesome_application_form_list_page',
 			), '', 56
 		);
 
@@ -60,15 +60,27 @@ class Admin {
 	 * Loads screen options into memory.
 	 */
 	public function template_page_init() {
-		// Table display code here.
+		global $application_table_list;
+
+		$application_table_list = new ListTable();
+		$application_table_list->process_actions();
+
+		// Add screen option.
+		add_screen_option(
+			'per_page',
+			array(
+				'default' => 20,
+				'option'  => 'applications_per_page',
+			)
+		);
+
 	}
 
 	/**
 	 *  Init the Awesome Application Form Settings page.
 	 */
-	public function awesome_application_form_settings_page() {
-		ob_start();
-		echo '<h1>Awesome Application Form Settings</h1>';
-		return ob_get_clean();
+	public function awesome_application_form_list_page() {
+		global $application_table_list;
+		$application_table_list->display_page();
 	}
 }
