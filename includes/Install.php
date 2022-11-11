@@ -89,6 +89,7 @@ if ( ! class_exists( 'Install' ) ) :
 						phone varchar(15) NOT NULL,
 						post_name varchar(255) NOT NULL,
 						cv varchar(100) NOT NULL,
+						submitted_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 						PRIMARY KEY (ID)
 					) $collate;
 							";
