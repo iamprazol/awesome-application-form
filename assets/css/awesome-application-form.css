@@ -31,8 +31,16 @@ body {
 	margin-left: 5px;
 }
 
+.aaf-label .required {
+	text-decoration: none;
+    border: none;
+    color: #ff4f55;
+	margin-left: 5px;
+}
+
 .aaf-frontend-field {
     outline: 0;
+	margin-bottom: 10px;
 }
 
 input[type=text] {
@@ -45,7 +53,32 @@ input[type=text] {
     height: 45px;
 	width: 100%;
     min-height: 36px;
-    margin-bottom: 10px;
     line-height: 1.5;
 	font: inherit;
+}
+
+.aaf-error {
+    background: rgba(255,79,85,.1);
+	display: block;
+    margin: 0 0 10px;
+    padding: 10px 15px;
+    border-top: 3px solid #ff4f55;
+    list-style: none outside;
+    width: auto;
+    word-wrap: break-word;
+    line-height: 1.25;
+    text-transform: none;
+}
+
+.aaf-success {
+	background: rgba(175,223,135,.1);
+	display: block;
+    margin: 0 0 10px;
+    padding: 10px 15px;
+    border-top: 3px solid #ACDF87;
+    list-style: none outside;
+    width: auto;
+    word-wrap: break-word;
+    line-height: 1.25;
+    text-transform: none;
 }

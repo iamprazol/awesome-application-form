@@ -58,6 +58,15 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		public $shortcodes = null;
 
 		/**
+		 * Ajax.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var AwesomeApplicationForm\Ajax;
+		 */
+		public $ajax = null;
+
+		/**
 		 * Plugin Version
 		 *
 		 * @var string
@@ -101,6 +110,7 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 			// Files to include.
 			$this->install = new Install();
 			$this->shortcodes = new Shortcodes();
+			$this->ajax = new Ajax();
 
 			// Class admin.
 			if ( $this->is_admin() ) {

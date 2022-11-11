@@ -23,7 +23,7 @@ class Shortcodes {
 	 */
 	public function __construct() {
 		$shortcodes = array(
-			'application_form'        => __CLASS__ . '::awesome_application_form',
+			'applicant_form'        => __CLASS__ . '::awesome_application_form',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -49,8 +49,21 @@ class Shortcodes {
 	 * @since 1.0.0
 	 */
 	public static function render_application_form() {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_enqueue_style( "awesome-application-form-style", AWESOME_APPLICATION_FORM_ASSETS_URL . '/css/awesome-application-form.css', array(), AWESOME_APPLICATION_FORM_VERSION );
+		wp_enqueue_script( "awesome-application-form-script", AWESOME_APPLICATION_FORM_ASSETS_URL . '/js/awesome-application-form' . $suffix . '.js', array(), AWESOME_APPLICATION_FORM_VERSION );
+
+		wp_localize_script(
+			"awesome-application-form-script",
+			"awesome_application_form_script_params",
+			array(
+				'ajax_url'                              => admin_url( 'admin-ajax.php' ),
+				'awesome_application_form_submit_nonce' => wp_create_nonce( 'awesome_application_form_submit_nonce' ),
+				'awesome_application_form_submit_button_text' => esc_html__( 'Submit', 'awesome-application-form'),
+				'awesome_application_form_submitting_button_text' => esc_html__( 'Submitting ...', 'awesome-application-form')
+				)
+			);
 
 		if ( is_user_logged_in() ) {
 			include AWESOME_APPLICATION_FORM_TEMPLATE_PATH . '/awesome-application-form-page.php';

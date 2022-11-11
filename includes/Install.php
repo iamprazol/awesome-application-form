@@ -80,7 +80,7 @@ if ( ! class_exists( 'Install' ) ) :
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 			$sql = "
-					CREATE TABLE IF NOT EXISTS {$wpdb->prefix}application_form (
+					CREATE TABLE IF NOT EXISTS {$wpdb->prefix}applicant_submissions (
 						ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 						first_name varchar(255) NOT NULL,
 						last_name varchar(255) NOT NULL,
