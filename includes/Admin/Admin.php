@@ -34,7 +34,14 @@ class Admin {
 	 * @return void
 	 */
 	private function init_hooks() {
+
+		$suffix    = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		add_action( 'admin_menu', array( $this, 'awesome_application_form_menu' ), 68 );
+
+		wp_register_style( 'awesome-application-form-dashboard-widget-style', AWESOME_APPLICATION_FORM_ASSETS_URL . '/css/dashboard.css', array(), AWESOME_APPLICATION_FORM_VERSION );
+		wp_register_script( 'awesome-application-form-dashboard-widget-js',AWESOME_APPLICATION_FORM_ASSETS_URL . '/js/dashboard-widget' . $suffix . '.js', 'jquery', AWESOME_APPLICATION_FORM_VERSION, false );
+
 	}
 
 	/**

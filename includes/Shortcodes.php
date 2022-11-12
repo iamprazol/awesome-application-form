@@ -67,9 +67,8 @@ class Shortcodes {
 				)
 			);
 
-		if ( is_user_logged_in() ) {
-			include AWESOME_APPLICATION_FORM_TEMPLATE_PATH . '/awesome-application-form-page.php';
-		}
+		include AWESOME_APPLICATION_FORM_TEMPLATE_PATH . '/awesome-application-form-page.php';
+
 	}
 
 }

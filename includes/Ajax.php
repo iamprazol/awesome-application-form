@@ -32,12 +32,19 @@ class AJAX {
 	 * Hook in methods - uses WordPress ajax handlers (admin-ajax)
 	 */
 	public static function add_ajax_events() {
+		$ajax_events = array(
+			"submit_form" => true,
+			"attachment_upload" => true,
+			'dashboard_widget'       => false,
+		);
 
-		add_action( 'wp_ajax_awesome_application_form_submit_form', array( __CLASS__, 'submit_form' ) );
-		add_action('wp_ajax_nopriv_awesome_application_form_submit_form', array( __CLASS__, 'submit_form' ) );
+		foreach ( $ajax_events as $ajax_event => $nopriv ) {
+			add_action( 'wp_ajax_awesome_application_form_' . $ajax_event, array( __CLASS__, $ajax_event ) );
 
-		add_action( 'wp_ajax_awesome_application_form_attachment_upload', array( __CLASS__, 'attachment_upload' ) );
-		add_action('wp_ajax_nopriv_awesome_application_form_attachment_upload', array( __CLASS__, 'attachment_upload' ) );
+			if ( $nopriv ) {
+				add_action( 'wp_ajax_nopriv_awesome_application_form_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+			}
+		}
 	}
 
 	/**
@@ -226,6 +233,25 @@ class AJAX {
 				'message' => esc_html__( "File cannot be uploaded at the moment", "awesome-application-form"),
 			)
 		);
+	}
+
+	/**
+	 * Dashboard Widget data.
+	 *
+	 */
+	public static function dashboard_widget() {
+		global $wpdb;
+
+		check_ajax_referer( 'dashboard-widget', 'security' );
+
+		$sql = "SELECT * FROM {$wpdb->prefix}applicant_submissions ORDER BY submitted_at DESC LIMIT 5";
+		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
+
+		wp_send_json_success(
+			array(
+				'applications'       => $result,
+			)
+		); // WPCS: XSS OK.
 	}
 
 }

@@ -56,3 +56,46 @@ if ( ! function_exists( 'awesome_application_form_send_application_received_mail
 		wp_mail( $email, $mail_subject, $message, $header );
 	}
 }
+
+add_action( 'wp_dashboard_setup', 'aaf_add_dashboard_widget' );
+
+if ( ! function_exists( 'aaf_add_dashboard_widget' ) ) {
+
+	/**
+	 * Register the applications dashboard widget.
+	 *
+	 */
+	function aaf_add_dashboard_widget() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		wp_add_dashboard_widget( 'awesome_application_form_latest_submissions', esc_html__( 'Latest Applications', 'awesome-application-form' ), 'aaf_application_widget' );
+	}
+}
+
+if ( ! function_exists( "aaf_application_widget" ) ) {
+
+	/**
+	 * Content to the aaf_application_widget widget.
+	 *
+	 */
+	function aaf_application_widget() {
+
+		wp_enqueue_script( 'awesome-application-form-dashboard-widget-js' );
+		wp_enqueue_style( 'awesome-application-form-dashboard-widget-style' );
+
+		wp_localize_script(
+			'awesome-application-form-dashboard-widget-js',
+			'aaf_widget_params',
+			array(
+				'ajax_url'     => admin_url( 'admin-ajax.php' ),
+				'loading'      => esc_html__( 'loading...', 'awesome-application-form' ),
+				'widget_nonce' => wp_create_nonce( 'dashboard-widget' ),
+			)
+		);
+
+		include AWESOME_APPLICATION_FORM_TEMPLATE_PATH . '/dashboard-widget.php';
+	}
+}
