@@ -5,9 +5,6 @@
 	"type": "wordpress-plugin",
 	"license": "GPL-3.0-or-later",
   "autoload": {
-		"files": [
-			"includes/Functions/CoreFunctions.php"
-		  ],
 		"psr-4": {
 		  "AwesomeApplicationForm\\": "includes/"
 		}
@@ -16,7 +13,9 @@
 		"composer/installers": "1.9.0"
 	},
 	"require-dev": {
-    "wp-cli/i18n-command": "2.2.9"
+    "wp-cli/i18n-command": ">2.2.9",
+    "symfony/finder": "5.4.11",
+    "symfony/deprecation-contracts": "2.5.2"
 	},
 	"scripts": {
 	  "phpcs": [

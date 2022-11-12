@@ -52,7 +52,7 @@ class Shortcodes {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_enqueue_style( "awesome-application-form-style", AWESOME_APPLICATION_FORM_ASSETS_URL . '/css/awesome-application-form.css', array(), AWESOME_APPLICATION_FORM_VERSION );
-		wp_enqueue_script( "awesome-application-form-script", AWESOME_APPLICATION_FORM_ASSETS_URL . '/js/awesome-application-form' . $suffix . '.js', array(), AWESOME_APPLICATION_FORM_VERSION );
+		wp_enqueue_script( "awesome-application-form-script", AWESOME_APPLICATION_FORM_ASSETS_URL . '/js/awesome-application-form' . $suffix . '.js', array('jquery'), AWESOME_APPLICATION_FORM_VERSION );
 
 		wp_localize_script(
 			"awesome-application-form-script",

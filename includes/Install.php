@@ -85,10 +85,10 @@ if ( ! class_exists( 'Install' ) ) :
 						first_name varchar(255) NOT NULL,
 						last_name varchar(255) NOT NULL,
 						address varchar(255) NOT NULL,
-						email varchar(100) NOT NULL,
-						phone varchar(15) NOT NULL,
+						email varchar(255) NOT NULL,
+						phone varchar(255) NOT NULL,
 						post_name varchar(255) NOT NULL,
-						cv varchar(100) NOT NULL,
+						cv varchar(255) NOT NULL,
 						submitted_at datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 						PRIMARY KEY (ID)
 					) $collate;

@@ -1,0 +1,208 @@
+# Copyright (C) 2022 Prajjwal Poudel
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Awesome Application Form 1.0.0\n"
+"Report-Msgid-Bugs-To: help@gmail.com\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-11-12T13:26:58+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: awesome-application-form\n"
+
+#. Plugin Name of the plugin
+msgid "Awesome Application Form"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wprdpress.org/plugins"
+msgstr ""
+
+#. Description of the plugin
+msgid "Awesome Application Form Plugin For WordPress."
+msgstr ""
+
+#. Author of the plugin
+msgid "Prajjwal Poudel"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://prajjwalpoudel.com.np"
+msgstr ""
+
+#: includes/Admin/Admin.php:55
+#: includes/Admin/Admin.php:56
+msgid "Awesome Applications"
+msgstr ""
+
+#: includes/Admin/ListTable.php:91
+#: templates/dashboard-widget.php:16
+msgid "Name"
+msgstr ""
+
+#: includes/Admin/ListTable.php:92
+msgid "Address"
+msgstr ""
+
+#: includes/Admin/ListTable.php:93
+#: templates/awesome-application-form-page.php:33
+#: templates/dashboard-widget.php:24
+msgid "Email"
+msgstr ""
+
+#: includes/Admin/ListTable.php:94
+msgid "Mobile"
+msgstr ""
+
+#: includes/Admin/ListTable.php:95
+#: templates/awesome-application-form-page.php:51
+#: templates/dashboard-widget.php:32
+msgid "Post Name"
+msgstr ""
+
+#: includes/Admin/ListTable.php:96
+msgid "CV"
+msgstr ""
+
+#: includes/Admin/ListTable.php:97
+msgid "Date"
+msgstr ""
+
+#: includes/Admin/ListTable.php:170
+#: includes/Admin/ListTable.php:230
+msgid "Delete"
+msgstr ""
+
+#: includes/Admin/ListTable.php:183
+msgid "Y/m/d g:i:s A"
+msgstr ""
+
+#: includes/Admin/ListTable.php:194
+msgid "%s ago"
+msgstr ""
+
+#: includes/Admin/ListTable.php:198
+msgid "Y/m/d"
+msgstr ""
+
+#: includes/Admin/ListTable.php:248
+msgid "Search Applications"
+msgstr ""
+
+#: includes/Admin/ListTable.php:271
+msgid "Nonce error please reload"
+msgstr ""
+
+#: includes/Ajax.php:59
+msgid "Nonce error please reload."
+msgstr ""
+
+#: includes/Ajax.php:72
+msgid "First Name field is required"
+msgstr ""
+
+#: includes/Ajax.php:78
+msgid "Last Name field is required"
+msgstr ""
+
+#: includes/Ajax.php:84
+msgid "Email field is required"
+msgstr ""
+
+#: includes/Ajax.php:90
+msgid "Present Address Field is required"
+msgstr ""
+
+#: includes/Ajax.php:96
+msgid "Mobile No. Field is required"
+msgstr ""
+
+#: includes/Ajax.php:102
+msgid "Post Name Field is required"
+msgstr ""
+
+#: includes/Ajax.php:108
+msgid "Upload CV Field is required"
+msgstr ""
+
+#: includes/Ajax.php:127
+msgid "Application Submitted Successfully"
+msgstr ""
+
+#: includes/Ajax.php:133
+msgid "Application cannot be submitted at this moment. Please try again some time later"
+msgstr ""
+
+#: includes/Ajax.php:149
+msgid "Nonce validation failed"
+msgstr ""
+
+#. translators: %s - Max Size
+#: includes/Ajax.php:163
+msgid "Please upload a file with size less than %s"
+msgstr ""
+
+#: includes/Ajax.php:180
+msgid "Upload path permission deny."
+msgstr ""
+
+#: includes/Ajax.php:235
+msgid "File cannot be uploaded at the moment"
+msgstr ""
+
+#: includes/ApplicationForm.php:148
+msgid "View Awesome Application Form Settings"
+msgstr ""
+
+#: includes/ApplicationForm.php:148
+msgid "Settings"
+msgstr ""
+
+#: includes/Functions/CoreFunctions.php:36
+msgid "Thank You for the application"
+msgstr ""
+
+#: includes/Functions/CoreFunctions.php:74
+msgid "Latest Applications"
+msgstr ""
+
+#: includes/Functions/CoreFunctions.php:94
+msgid "loading..."
+msgstr ""
+
+#: includes/Shortcodes.php:64
+#: templates/awesome-application-form-page.php:66
+msgid "Submit"
+msgstr ""
+
+#: includes/Shortcodes.php:65
+msgid "Submitting ..."
+msgstr ""
+
+#: includes/Shortcodes.php:66
+msgid "Uploading ..."
+msgstr ""
+
+#: templates/awesome-application-form-page.php:21
+msgid "First Name"
+msgstr ""
+
+#: templates/awesome-application-form-page.php:26
+msgid "Last Name"
+msgstr ""
+
+#: templates/awesome-application-form-page.php:37
+msgid "Present Address"
+msgstr ""
+
+#: templates/awesome-application-form-page.php:44
+msgid "Mobile No"
+msgstr ""
+
+#: templates/awesome-application-form-page.php:58
+msgid "Upload CV"
+msgstr ""
