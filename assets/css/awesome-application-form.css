@@ -82,3 +82,33 @@ input[type=text] {
     line-height: 1.25;
     text-transform: none;
 }
+
+.aaf-file-uploader {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.aaf-file-uploaded {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.aaf-file-uploaded:hover {
+	svg{
+			stroke: #FF6666;
+			cursor: pointer;
+	}
+}
+
+.aaf-file-details {
+	display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid blue;
+    padding: 10px;
+    border-radius: 10px;
+}

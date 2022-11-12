@@ -54,6 +54,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<div class="aaf-form-row">
+			<div class="aaf-input-row aaf-file-uploader">
+				<label for="aaf-user-file" class="aaf-label"><?php esc_html_e( 'Upload CV', 'awesome-application-form' ); ?><abbr class="required" title="required">*</abbr></label>
+				<input type="file" name="aaf-user-file" id="aaf-user-file" class="aaf-user-file-upload-input" >
+				<div class="aaf-file-uploaded"></div>
+				<input type="hidden" name="aaf-file-input" id="aaf-file-input"/>
+			</div>
+		</div>
+
+		<div class="aaf-form-row">
 			<button type="submit" class="btn btn-primary" name="aaf-submit" id="aaf-submit-btn"><?php esc_html_e( 'Submit', 'awesome-application-form' ); ?></button>
 		</div>
 	</form>

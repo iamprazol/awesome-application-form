@@ -95,7 +95,6 @@ if ( ! class_exists( 'Install' ) ) :
 							";
 
 							dbDelta( $sql );
-							error_log( print_r( dbDelta( $sql ), true ) );
 		}
 	}
 endif;

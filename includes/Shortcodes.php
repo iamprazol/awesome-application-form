@@ -60,8 +60,10 @@ class Shortcodes {
 			array(
 				'ajax_url'                              => admin_url( 'admin-ajax.php' ),
 				'awesome_application_form_submit_nonce' => wp_create_nonce( 'awesome_application_form_submit_nonce' ),
+				'cv_upload_nonce' => wp_create_nonce( 'cv_upload_nonce' ),
 				'awesome_application_form_submit_button_text' => esc_html__( 'Submit', 'awesome-application-form'),
-				'awesome_application_form_submitting_button_text' => esc_html__( 'Submitting ...', 'awesome-application-form')
+				'awesome_application_form_submitting_button_text' => esc_html__( 'Submitting ...', 'awesome-application-form'),
+				'awesome_application_form_uploading_text' => esc_html__( 'Uploading ...', 'awesome-application-form')
 				)
 			);
 

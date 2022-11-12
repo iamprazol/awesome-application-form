@@ -80,4 +80,69 @@ jQuery(document).ready(function ($) {
 			},
 		});
 	});
+
+	// Handle CV upload.
+	$(document).ready(function () {
+		$(document).on("change", "#aaf-user-file", function () {
+			var formData = new FormData();
+
+			if (this.files && this.files[0]) {
+				formData.append("file", this.files[0]);
+			}
+
+			formData.append(
+				"nonce",
+				awesome_application_form_script_params.cv_upload_nonce
+			);
+			formData.append(
+				"action",
+				"awesome_application_form_attachment_upload"
+			);
+
+			$(".aaf-file-uploaded").html(
+				"<div class='file-info-section aaf-file-details'><div class='file-info aaf-file-thumb'><p class='file-name'>" +
+					awesome_application_form_script_params.awesome_application_form_uploading_text +
+					"</p></div></div>"
+			);
+
+			$.ajax({
+				type: "POST",
+				url: awesome_application_form_script_params.ajax_url,
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function (response) {
+					if (response.success) {
+						$(".aaf-file-uploaded").html("");
+
+						var attachment_id = response.data.attachment_id,
+							url = response.data.attachment_url,
+							filename = url.split("/").pop();
+
+						result =
+							'<div class="file-info-section aaf-file-details">';
+						result += '<div class="file-image">';
+						result +=
+							'<img width="30" height="30" src="/wp-content/plugins/awesome-application-form/assets/img/default.svg" />';
+						result += "</div>";
+						result += '<div class="file-info aaf-file-thumb">';
+						result +=
+							'<a href="' +
+							url +
+							'" target="_blank" class="aaf-attachment-link">';
+						result += '<p class="file-name">' + filename + "</p>";
+						result += "</a>";
+						result += "</div>";
+						result +=
+							'<a class="aaf-remove" data-attachment-id=" ' +
+							attachment_id +
+							' "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></a></div>';
+
+						$("#aaf-file-input").val(attachment_id);
+						$(".aaf-file-uploaded").append(result);
+					}
+				},
+			});
+		});
+	});
 });

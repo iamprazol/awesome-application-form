@@ -165,8 +165,9 @@ class ListTable extends \WP_List_Table {
 			case 'email':
 			case 'phone':
 			case 'post_name':
-			case 'cv':
 				return $application[ $column_name ];
+			case 'cv':
+				return '<a href="' . esc_url_raw( wp_get_attachment_url( $application[ $column_name ] ) ) . '" target="_blank" >' .  basename( get_attached_file( $application[ $column_name ] ) ) . '</a>';
 			case 'date':
 				return $application['submitted_at'];
 			default:
