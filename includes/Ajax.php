@@ -108,6 +108,8 @@ class AJAX {
 			$error_message['aaf-file-input_error'] = esc_html__( 'Upload CV Field is required', 'awesome-application-form' );
 		}
 
+		$applicant_data['submitted_at'] = current_datetime()->format( 'Y-m-d H:i:s' );
+
 		if ( ! empty( $error_message ) ) {
 			wp_send_json_error( array( 'field_error' => $error_message ) );
 		}
@@ -245,7 +247,7 @@ class AJAX {
 		check_ajax_referer( 'dashboard-widget', 'security' );
 
 		$sql = "SELECT * FROM {$wpdb->prefix}applicant_submissions ORDER BY submitted_at DESC LIMIT 5";
-		$result = $wpdb->get_results( $sql, 'ARRAY_A' );
+		$result = $wpdb->get_results( $wpdb->prepare( "$sql" ), 'ARRAY_A' );
 
 		wp_send_json_success(
 			array(

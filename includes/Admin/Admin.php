@@ -24,6 +24,9 @@ class Admin {
 	public function __construct() {
 
 		$this->init_hooks();
+
+		// Set screens.
+		add_filter( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
 	}
 
 	/**
@@ -81,6 +84,8 @@ class Admin {
 			)
 		);
 
+		do_action( 'template_page_init' );
+
 	}
 
 	/**
@@ -89,5 +94,20 @@ class Admin {
 	public function awesome_application_form_list_page() {
 		global $application_table_list;
 		$application_table_list->display_page();
+	}
+
+	/**
+	 * Validate screen options on update.
+	 *
+	 * @param mixed $status Status.
+	 * @param mixed $option Option.
+	 * @param mixed $value Value.
+	 */
+	public function set_screen_option( $status, $option, $value ) {
+		if ( in_array( $option, array( 'applications_per_page' ), true ) ) {
+			return $value;
+		}
+
+		return $status;
 	}
 }

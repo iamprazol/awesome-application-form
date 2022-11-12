@@ -41,11 +41,15 @@ class ListTable extends \WP_List_Table {
 	 *
 	 * @return mixed
 	 */
-	public static function get_applications( $per_page = 5, $page_number = 1 ) {
+	public static function get_applications( $per_page = 5, $page_number = 1, $search ) {
 
 		global $wpdb;
 
 		$sql = "SELECT * FROM {$wpdb->prefix}applicant_submissions";
+
+		if ( '' !== $search ) {
+			$sql .= $wpdb->prepare( " WHERE ( first_name LIKE %s ) OR  ( last_name LIKE %s ) OR  ( email LIKE %s ) OR  ( post_name LIKE %s )", "%{$search}%", "%{$search}%", "%{$search}%", "%{$search}%");
+		}
 
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
@@ -105,7 +109,7 @@ class ListTable extends \WP_List_Table {
 	 */
 	function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="bulk-delete[]" value="%s" />', $item['ID']
+			'<input type="checkbox" name="bulk-item-selection[]" value="%s" />', $item['ID']
 		);
 	}
 
@@ -121,13 +125,19 @@ class ListTable extends \WP_List_Table {
 		$per_page     = $this->get_items_per_page( 'applications_per_page', 5 );
 		$current_page = $this->get_pagenum();
 		$total_items  = self::record_count();
+		$search = '';
+
+		// Handle the search query.
+		if ( ! empty( $_REQUEST['s'] ) ) {
+			$search = sanitize_text_field( trim( wp_unslash( $_REQUEST['s'] ) ) );
+		}
 
 		$this->set_pagination_args( [
 			'total_items' => $total_items, //WE have to calculate the total number of items
 			'per_page'    => $per_page //WE have to determine how many items to show on a page
 		] );
 
-		$this->items = self::get_applications( $per_page, $current_page );
+		$this->items = self::get_applications( $per_page, $current_page, $search );
 	}
 
 	/**
@@ -169,7 +179,26 @@ class ListTable extends \WP_List_Table {
 			case 'cv':
 				return '<a href="' . esc_url_raw( wp_get_attachment_url( $application[ $column_name ] ) ) . '" target="_blank" >' .  basename( get_attached_file( $application[ $column_name ] ) ) . '</a>';
 			case 'date':
-				return $application['submitted_at'];
+				$t_time = mysql2date(
+					__( 'Y/m/d g:i:s A', 'awesome-application-form' ),
+					$application['submitted_at'],
+					true
+				);
+				$m_time = $application['submitted_at'];
+				$time   = mysql2date( 'G', $application['submitted_at'] ) - get_option( 'gmt_offset' ) * 3600;
+
+				$time_diff = time() - $time;
+
+				if ( $time_diff > 0 && $time_diff < 24 * 60 * 60 ) {
+					$h_time = sprintf(
+						__( '%s ago', 'awesome-application-form' ),
+						human_time_diff( $time )
+					);
+				} else {
+					$h_time = mysql2date( __( 'Y/m/d', 'awesome-application-form' ), $m_time );
+				}
+
+				return '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
 			default:
 			return print_r( $application, true ) ; //Show the whole array for troubleshooting purposes
 		}
@@ -213,7 +242,7 @@ class ListTable extends \WP_List_Table {
 				<h1 class="wp-heading-inline"><?php esc_html_e( 'Awesome Applications' ); ?></h1>
 				<hr class="wp-header-end">
 				<form id="application-list" method="get">
-					<input type="hidden" name="page" value="awesome-application" />
+					<input type="hidden" name="page" value="awesome-application-form" />
 					<?php
 						$this->views();
 						$this->search_box( esc_html__( 'Search Applications', 'awesome-application-form' ), 'application' );
@@ -239,7 +268,7 @@ class ListTable extends \WP_List_Table {
 			$nonce = esc_attr( $_REQUEST['_wpnonce'] );
 
 			if ( ! wp_verify_nonce( $nonce, 'aaf-delete-application' ) ) {
-				die( 'Go get a life script kiddies' );
+				die( esc_html__( 'Nonce error please reload', 'awesome-application-form' ) );
 			}
 			else {
 				self::delete_application( absint( $_GET['application'] ) );
@@ -250,8 +279,9 @@ class ListTable extends \WP_List_Table {
 		}
 
 		// If the delete bulk action is triggered
-		if ( ( isset( $_POST['action'] ) && $_POST['action'] == 'bulk-delete' ) || ( isset( $_POST['action2'] ) && $_POST['action2'] == 'bulk-delete' ) ) {
-			$delete_ids = esc_sql( $_POST['bulk-delete'] );
+		$action = $this->current_action();
+		if ( $action == 'bulk-delete' ) {
+			$delete_ids = esc_sql( $_GET['bulk-item-selection'] );
 
 			// loop over the array of record IDs and delete them
 			foreach ( $delete_ids as $id ) {
