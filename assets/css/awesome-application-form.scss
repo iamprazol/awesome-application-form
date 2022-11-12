@@ -1,0 +1,110 @@
+.awesome_application_form_wrap {
+	margin-bottom: 30px;
+    border: 1px solid #dee0e9;
+    padding: 20px;
+    box-sizing: border-box;
+
+	.aaf-form-row {
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+
+		.aaf-input-row {
+			flex: 1 0 45%;
+
+			.aaf-label {
+				color: #676d8a;
+				font-weight: 700;
+				display: block;
+				font-size: 14px;
+				margin-bottom: 10px;
+				margin-top: 10px;
+				margin-left: 5px;
+
+				.required {
+					text-decoration: none;
+					border: none;
+					color: #ff4f55;
+					margin-left: 5px;
+				}
+			}
+
+			.aaf-frontend-field {
+				outline: 0;
+				margin-bottom: 10px;
+			}
+
+			input[type=text] {
+				border-radius: 2px;
+				border: 1px solid #c0c4d4;
+				transition: all .35s;
+				padding: 10px 15px;
+				background: #fff;
+				color: #676d8a;
+				height: 45px;
+				width: 100%;
+				min-height: 36px;
+				line-height: 1.5;
+				font: inherit;
+			}
+
+			&.aaf-file-uploader {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+
+				.aaf-file-uploaded {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+					align-items: flex-start;
+
+					.aaf-file-details {
+						display: flex;
+						gap: 10px;
+						align-items: center;
+						justify-content: space-between;
+						border: 1px solid blue;
+						padding: 10px;
+						border-radius: 10px;
+
+						.file-name:hover {
+							svg{
+								stroke: #FF6666;
+								cursor: pointer;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.aaf-error {
+		background: rgba(255,79,85,.1);
+		display: block;
+		margin: 0 0 10px;
+		padding: 10px 15px;
+		border-top: 3px solid #ff4f55;
+		list-style: none outside;
+		width: auto;
+		word-wrap: break-word;
+		line-height: 1.25;
+		text-transform: none;
+	}
+
+	.aaf-success {
+		background: rgba(175,223,135,.1);
+		display: block;
+		margin: 0 0 10px;
+		padding: 10px 15px;
+		border-top: 3px solid #ACDF87;
+		list-style: none outside;
+		width: auto;
+		word-wrap: break-word;
+		line-height: 1.25;
+		text-transform: none;
+	}
+}

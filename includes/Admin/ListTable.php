@@ -36,8 +36,8 @@ class ListTable extends \WP_List_Table {
 	/**
 	 * Retrieve applications data from the database
 	 *
-	 * @param int $per_page
-	 * @param int $page_number
+	 * @param int $per_page Display number of application per page.
+	 * @param int $page_number Page number.
 	 *
 	 * @return mixed
 	 */
@@ -103,7 +103,7 @@ class ListTable extends \WP_List_Table {
 	/**
 	 * Render the bulk edit checkbox
 	 *
-	 * @param array $item
+	 * @param array $item Application.
 	 *
 	 * @return string
 	 */

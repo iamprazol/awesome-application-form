@@ -139,7 +139,7 @@ class AJAX {
 	/**
 	 * File upload function
 	 *
-	 * @var array $_POST
+	 * @var array $_POST Form Data.
 	 */
 	public static function attachment_upload() {
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'cv_upload_nonce' ) ) { //phpcs:ignore;
