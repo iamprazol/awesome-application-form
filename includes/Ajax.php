@@ -108,6 +108,11 @@ class AJAX {
 		$query_success = $wpdb->insert( 'wp_applicant_submissions', $applicant_data );
 
 		if ( $query_success ) {
+			$fullname = $applicant_data['first_name'] . ' ' . $applicant_data['last_name'];
+
+			//  Leave an action hook for after application submission.
+			do_action( 'awesome_application_form_after_application_submission', $applicant_data['email'], $fullname );
+
 			wp_send_json_success(
 				array(
 					'message' => esc_html__( 'Application Submitted Successfully', 'awesome-application-form' )
@@ -146,7 +151,7 @@ class AJAX {
 			wp_send_json_error(
 				array(
 					/* translators: %s - Max Size */
-					'message' => sprintf( __( 'Please upload a file with size less than %s', 'awesome-application-form' ), size_format( $max_size ) ),
+					'message' => sprintf( esc_html__( 'Please upload a file with size less than %s', 'awesome-application-form' ), size_format( $max_size ) ),
 				)
 			);
 		}
@@ -163,7 +168,7 @@ class AJAX {
 
 			wp_send_json_error(
 				array(
-					'message' => __( 'Upload path permission deny.', 'awesome-application-form' ),
+					'message' => esc_html__( 'Upload path permission deny.', 'awesome-application-form' ),
 				)
 			);
 
