@@ -94,6 +94,9 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		private function __construct() {
 			require 'Functions/CoreFunctions.php';
 
+			// Set up localisation.
+			$this->load_plugin_textdomain();
+
 			// Actions and Filters.
 			add_filter( 'plugin_action_links_' . plugin_basename( AWESOME_APPLICATION_FORM_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
 			add_action( 'init', array( $this, 'includes' ) );
@@ -155,6 +158,24 @@ if ( ! class_exists( 'ApplicationForm' ) ) :
 		 */
 		public function plugin_url() {
 			return untrailingslashit( plugins_url( '/', __FILE__ ) );
+		}
+
+		/**
+		 * Load Localisation files.
+		 *
+		 * Note: the first-loaded translation file overrides any following ones if the same translation is present.
+		 *
+		 * Locales found in:
+		 *      - WP_LANG_DIR/awesome-application-form/awesome-application-form-LOCALE.mo
+		 *      - WP_LANG_DIR/plugins/awesome-application-form-LOCALE.mo
+		 */
+		public function load_plugin_textdomain() {
+			$locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
+			$locale = apply_filters( 'plugin_locale', $locale, 'awesome-application-form' );
+
+			unload_textdomain( 'awesome-application-form' );
+			load_textdomain( 'awesome-application-form', WP_LANG_DIR . '/awesome-application-form/awesome-application-form-' . $locale . '.mo' );
+			load_plugin_textdomain( 'awesome-application-form', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
 	}
